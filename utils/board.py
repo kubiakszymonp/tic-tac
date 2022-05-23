@@ -6,4 +6,6 @@ class Board:
 
     def draw_board(self):
         for i in range(self.dimension):
+            for j in range(self.dimension):
+                print(self.matrix[i][j], end="")
             print()
