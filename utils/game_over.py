@@ -1,3 +1,5 @@
+from random import randrange
+
 def is_game_over(board):
     dim = board.dimension
     char = ""
@@ -35,3 +37,9 @@ arr = [[1, 1, 1], [1, 0, 0], [0, 0, 1]]
 
 cont = contains_same_char(arr[1])
 a = 4
+
+
+def ai_move(board):
+    x = randrange(board.dimension)
+    y = randrange(board.dimension)
+    return x, y
