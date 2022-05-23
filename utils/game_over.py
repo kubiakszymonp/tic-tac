@@ -1,21 +1,31 @@
 from random import randrange
 
+
 def is_game_over(board):
-    dim = board.dimension
-    char = ""
-    # check rows
-    for i in range(dim):
-        char = board.matrix[i][0]
-        for j in range(1, dim):
-            checked_char = board.matrix[i][j]
-            if checked_char != char:
-                break
 
-    return
+    diagonals = get_board_diagonals(board.matrix)
+    cols = get_board_columns(board.matrix)
+    rows = get_board_rows(board.matrix)
+
+    all_directions = diagonals
+    all_directions.extend(cols)
+    all_directions.extend(rows)
+
+    chars = ['x', 'o']
+    for i in all_directions:
+        contains = contains_same_char(i, chars[0])
+        if contains == True:
+            return True
+
+    for i in all_directions:
+        contains = contains_same_char(i, chars[1])
+        if contains == True:
+            return True
+
+    return False
 
 
-def contains_same_char(arr):
-    char = arr[0]
+def contains_same_char(arr, char):
     for i in range(len(arr)):
         if char != arr[i]:
             return False
@@ -28,15 +38,42 @@ def get_board_diagonals(matrix):
 
     for i in range(len(matrix)):
         desc_diagonal.append(matrix[i][i])
-        asc_diagonal.append(matrix[i][len(matrix) - i])
+        asc_diagonal.append(matrix[i][len(matrix) - i - 1])
 
     return [desc_diagonal, asc_diagonal]
 
 
-arr = [[1, 1, 1], [1, 0, 0], [0, 0, 1]]
+def get_board_columns(matrix):
+    columns = []
+    for i in range(len(matrix)):
+        column = []
+        for j in range(len(matrix)):
+            column.append(matrix[j][i])
+        columns.append(column)
 
-cont = contains_same_char(arr[1])
-a = 4
+    return columns
+
+
+def get_board_rows(matrix):
+    columns = []
+    for i in range(len(matrix)):
+        column = []
+        for j in range(len(matrix)):
+            column.append(matrix[i][j])
+        columns.append(column)
+
+    return columns
+
+
+# arr = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+
+# diagonals = get_board_diagonals(arr)
+# cols = get_board_columns(arr)
+# rows = get_board_rows(arr)
+
+# all_directions = diagonals
+# all_directions.extend(cols)
+# all_directions.extend(rows)
 
 
 def ai_move(board):
