@@ -13,3 +13,9 @@ class Board:
     def make_move(self, x, y, player):
         self.matrix[int(x)][int(y)] = "x" if player else "o"
         return self
+
+    def can_move(self, x, y):
+        if self.matrix[int(x)][int(y)] == '-':
+            return True
+        else:
+            return False
