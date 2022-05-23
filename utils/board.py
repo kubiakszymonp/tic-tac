@@ -9,3 +9,12 @@ class Board:
             for j in range(self.dimension):
                 print(self.matrix[i][j], end="")
             print()
+
+    def make_move(self, player):
+        try:
+            x, y = input("Enter two values: ").split()
+            self.matrix[int(x)][int(y)] = "x" if player else "o"
+        except BaseException as ex:
+            print(ex)
+
+        return self.matrix
